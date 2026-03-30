@@ -2,11 +2,13 @@ const express = require('express');
 const { connectToDatabase } = require('./config/db');
 const { port } = require('./config/env');
 const webhookRoutes = require('./routes/webhookRoutes');
+const path = require('path');
 const healthRoutes = require('./routes/healthRoutes');
 
 const app = express();
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/webhook', webhookRoutes);
 app.use('/', healthRoutes);
